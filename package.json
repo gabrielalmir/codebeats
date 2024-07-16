@@ -4,9 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "bun run src/index.ts",
-    "thumb": "node dist/thumbnail.cjs",
-    "build": "bun build src/index.ts --minify --outdir dist --target=node",
-    "build:thumb": "tsup src/thumbnail.ts --minify"
+    "thumb": "tsup src/thumbnail.ts --minify && node dist/thumbnail.cjs",
+    "build": "bun build src/index.ts --minify --outdir dist --target=node"
   },
   "devDependencies": {
     "@types/bun": "latest"

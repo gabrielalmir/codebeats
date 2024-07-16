@@ -1,5 +1,6 @@
 import { createCanvas, loadImage, registerFont } from 'canvas';
 import fs from 'fs';
+import path from 'path';
 import sharp from 'sharp';
 
 class ThumbnailGenerator {
@@ -11,7 +12,7 @@ class ThumbnailGenerator {
         this.outputPath = outputPath;
     }
 
-    async generateThumbnail() {
+    async generateThumbnail(fontSize: number = 110) {
         // Load the image
         const imageBuffer = fs.readFileSync(this.imagePath);
         const image = await sharp(imageBuffer).toBuffer();
@@ -44,21 +45,35 @@ class ThumbnailGenerator {
         }
         ctx.globalAlpha = 1.0;
 
+        const fontSizeLarge = fontSize;
+        const fontSizeSmall = fontSize - 50;
+
+        const fontPath = path.join(__dirname, '..', 'assets', 'fonts', 'dejavu-sans');
+        const fontPathBold = path.join(fontPath, 'DejaVuSans-Bold.ttf');
+        const fontPathRegular = path.join(fontPath, 'DejaVuSans.ttf');
+
+        const fontExists = fs.existsSync(fontPathBold) && fs.existsSync(fontPathRegular);
+        if (!fontExists) {
+            throw new Error('Font files not found');
+        }
+
+        console.log('Font files found');
+
         // Register and load fonts
-        registerFont('assets/fonts/dejavu-sans/DejaVuSans-Bold.ttf', { family: 'DejaVuSans-Bold' });
-        registerFont('assets/fonts/dejavu-sans/DejaVuSans.ttf', { family: 'DejaVuSans' });
+        registerFont(fontPathBold, { family: 'DejaVuSans-Bold' });
+        registerFont(fontPathRegular, { family: 'DejaVuSans' });
 
         const textLarge = "CodeBeats";
-        const textSmall = "Study & Relax";
+        const textSmall = "Study, Focus, Relax, Repeat";
 
         // Calculate positions for the text
-        ctx.font = '110px "DejaVuSans-Bold"';
+        ctx.font = `${fontSizeLarge}px "DejaVuSans-Bold"`;
         const textLargeWidth = ctx.measureText(textLarge).width;
-        const textLargeHeight = 110; // Font size
+        const textLargeHeight = fontSizeLarge; // Font size
 
-        ctx.font = '90px "DejaVuSans"';
+        ctx.font = `${fontSizeSmall}px "DejaVuSans"`;
         const textSmallWidth = ctx.measureText(textSmall).width;
-        const textSmallHeight = 90; // Font size
+        const textSmallHeight = fontSizeSmall; // Font size
 
         const xLarge = (width - textLargeWidth) / 2;
         const yLarge = (height - (textLargeHeight + textSmallHeight)) / 2 + 80;
@@ -69,18 +84,18 @@ class ThumbnailGenerator {
         // Add shadow for the text
         const shadowOffset = 2;
         ctx.fillStyle = 'black';
-        ctx.font = '110px "DejaVuSans-Bold"';
+        ctx.font = `${fontSizeLarge}px "DejaVuSans-Bold"`;
         ctx.fillText(textLarge, xLarge + shadowOffset, yLarge + shadowOffset);
-        ctx.font = '90px "DejaVuSans"';
+        ctx.font = `${fontSizeSmall}px "DejaVuSans"`;
         ctx.fillText(textSmall, xSmall + shadowOffset, ySmall + shadowOffset);
 
         // Add the text
         ctx.fillStyle = 'white';
-        ctx.font = '110px "DejaVuSans-Bold"';
+        ctx.font = `${fontSizeLarge}px "DejaVuSans-Bold"`;
         ctx.fillText(textLarge, xLarge, yLarge);
 
         ctx.fillStyle = 'lightgrey';
-        ctx.font = '90px "DejaVuSans"';
+        ctx.font = `${fontSizeSmall}px "DejaVuSans"`;
         ctx.fillText(textSmall, xSmall, ySmall);
 
         // Save the image
@@ -102,8 +117,8 @@ class ThumbnailGenerator {
 }
 
 async function main() {
-    const imagePath = 'assets/images/5.png';
-    const outputPath = 'assets/thumbs/5.png';
+    const imagePath = 'assets/images/2.png';
+    const outputPath = 'assets/thumbs/2.png';
     const generator = new ThumbnailGenerator(imagePath, outputPath);
     await generator.generateThumbnail();
     // resize the image
