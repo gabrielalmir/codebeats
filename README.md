@@ -1,5 +1,5 @@
 
-# Project: CodeBeats
+# CodeBeats Lo-fi for Study and Relaxation
 
 ## Description
 The **CodeBeats** project is a video generator that combines images and audio to create relaxing videos for study and relaxation. It also includes a functionality to generate custom thumbnails for the generated videos. The project uses libraries such as `fluent-ffmpeg`, `sharp`, and `canvas` for media manipulation.
