@@ -52,13 +52,13 @@ class ThumbnailGenerator {
         const textSmall = "Study & Relax";
 
         // Calculate positions for the text
-        ctx.font = '90px "DejaVuSans-Bold"';
+        ctx.font = '110px "DejaVuSans-Bold"';
         const textLargeWidth = ctx.measureText(textLarge).width;
-        const textLargeHeight = 90; // Font size
+        const textLargeHeight = 110; // Font size
 
-        ctx.font = '70px "DejaVuSans"';
+        ctx.font = '90px "DejaVuSans"';
         const textSmallWidth = ctx.measureText(textSmall).width;
-        const textSmallHeight = 70; // Font size
+        const textSmallHeight = 90; // Font size
 
         const xLarge = (width - textLargeWidth) / 2;
         const yLarge = (height - (textLargeHeight + textSmallHeight)) / 2 + 80;
@@ -69,18 +69,18 @@ class ThumbnailGenerator {
         // Add shadow for the text
         const shadowOffset = 2;
         ctx.fillStyle = 'black';
-        ctx.font = '90px "DejaVuSans-Bold"';
+        ctx.font = '110px "DejaVuSans-Bold"';
         ctx.fillText(textLarge, xLarge + shadowOffset, yLarge + shadowOffset);
-        ctx.font = '70px "DejaVuSans"';
+        ctx.font = '90px "DejaVuSans"';
         ctx.fillText(textSmall, xSmall + shadowOffset, ySmall + shadowOffset);
 
         // Add the text
         ctx.fillStyle = 'white';
-        ctx.font = '90px "DejaVuSans-Bold"';
+        ctx.font = '110px "DejaVuSans-Bold"';
         ctx.fillText(textLarge, xLarge, yLarge);
 
         ctx.fillStyle = 'lightgrey';
-        ctx.font = '70px "DejaVuSans"';
+        ctx.font = '90px "DejaVuSans"';
         ctx.fillText(textSmall, xSmall, ySmall);
 
         // Save the image
@@ -102,8 +102,8 @@ class ThumbnailGenerator {
 }
 
 async function main() {
-    const imagePath = 'assets/images/4.png';
-    const outputPath = 'assets/thumbs/4.png';
+    const imagePath = 'assets/images/5.png';
+    const outputPath = 'assets/thumbs/5.png';
     const generator = new ThumbnailGenerator(imagePath, outputPath);
     await generator.generateThumbnail();
     // resize the image
