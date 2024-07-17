@@ -7,6 +7,9 @@ assets/output/*
 assets/fonts/*
 assets/thumbs/*
 
+videos.txt
+audios.txt
+
 # ignore prompts
 prompts/*
 

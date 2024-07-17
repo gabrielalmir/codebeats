@@ -4,7 +4,6 @@
   "type": "module",
   "scripts": {
     "start": "node dist/index.cjs",
-    "thumb": "tsup src/thumbnail.ts --minify && node dist/thumbnail.cjs",
     "build": "tsup src/index.ts --minify",
     "dev": "tsx watch src/index.ts"
   },

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-class ThumbnailGenerator {
+export class ThumbnailGenerator {
     private imagePath: string;
     private outputPath: string;
 
@@ -116,16 +116,3 @@ class ThumbnailGenerator {
     }
 }
 
-async function main() {
-    const imagePath = 'assets/images/13.png';
-    const outputPath = 'assets/thumbs/13.png';
-    const generator = new ThumbnailGenerator(imagePath, outputPath);
-    await generator.generateThumbnail();
-    // resize the image
-    await generator.resizeImage(outputPath, outputPath, 1280, 720);
-
-    // optimize the image
-    await generator.compressImage(outputPath, outputPath, 80);
-}
-
-main().catch(console.error);
