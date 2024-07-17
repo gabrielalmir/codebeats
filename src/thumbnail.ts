@@ -117,8 +117,8 @@ class ThumbnailGenerator {
 }
 
 async function main() {
-    const imagePath = 'assets/images/2.png';
-    const outputPath = 'assets/thumbs/2.png';
+    const imagePath = 'assets/images/13.png';
+    const outputPath = 'assets/thumbs/13.png';
     const generator = new ThumbnailGenerator(imagePath, outputPath);
     await generator.generateThumbnail();
     // resize the image
