@@ -6,12 +6,11 @@ assets/images/*
 assets/output/*
 assets/fonts/*
 assets/thumbs/*
+assets/docs/*
+assets/prompts/*
 
 videos.txt
 audios.txt
-
-# ignore prompts
-prompts/*
 
 # Logs
 
