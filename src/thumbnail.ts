@@ -18,8 +18,8 @@ export class ThumbnailGenerator {
         const image = await sharp(imageBuffer).toBuffer();
         const metadata = await sharp(imageBuffer).metadata();
 
-        const width = metadata.width || 800;
-        const height = metadata.height || 600;
+        const width = metadata.width ?? 800;
+        const height = metadata.height ?? 600;
 
         // Create a canvas
         const canvas = createCanvas(width, height);
